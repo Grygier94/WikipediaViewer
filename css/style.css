@@ -1,0 +1,33 @@
+body {
+    font-size: 150%;
+    text-align: center;
+    background-color: #0069c4;
+    margin: 0;
+    padding: 0;
+}
+
+#titleLabel {
+    font-size: calc(2em + 1vw);
+    margin-top: 3vw;
+    margin-bottom: 1vw;
+    color: #ffac4c;
+    text-shadow: 0px 0px 15px black;
+}
+
+.form-group {
+    position: relative;
+}
+
+.list-group-item {
+    background-color: #fefefe;
+    margin: 5px;
+}
+
+    .list-group-item:hover {
+        background-color: #eee !important;
+
+        border-left-width: 10px;
+        border-left-color: #ffac4c;
+        border-right-width: 10px;
+        border-right-color: #ffac4c;
+    }
