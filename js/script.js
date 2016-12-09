@@ -17,21 +17,16 @@ $(document).ready(function () {
 
         content.html('');
         if (input != null && input != "") {
-            var url = "https://en.wikipedia.org/w/api.php?action=query&generator=allpages&gaplimit=11&gapfilterredir=nonredirects&gapfrom=" + input + "&format=json&callback=?";
+            var url = "https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&srsearch=" + input + "&srprop=snippet&callback=?";
 
             $.getJSON(url, function (data) {
-                $.each(data.query.pages, function (i, item) {
+                $.each(data.query.search, function (i, item) {
+                    var desc = item.snippet;
 
-                    var url2 = 'https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exsentences=2&exintro=&explaintext=&titles=' + this.title + "&format=json&callback=?";
-                    var desc;
-                    $.getJSON(url2, function (innerData) {
-                        desc = innerData.query.pages[item.pageid].extract;
-
-                        var row = '<a href="https://en.wikipedia.org/?curid=' + item.pageid +
+                    var row = '<a href="https://en.wikipedia.org/wiki/' + item.title +
                         '" target="_blank" class="list-group-item"><h4 class="list-group-item-heading">' + item.title +
                         '</h4><p class="list-group-item-text">' + desc + '</p></a>';
-                        content.append(row);
-                    }); //json                 
+                    content.append(row);
                 }); //loop
             }); //json
 
