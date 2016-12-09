@@ -20,14 +20,21 @@ $(document).ready(function () {
             var url = "https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&srsearch=" + input + "&srprop=snippet&callback=?";
 
             $.getJSON(url, function (data) {
-                $.each(data.query.search, function (i, item) {
-                    var desc = item.snippet;
+                if (data.query.search.length > 0)
+                {
+                    $.each(data.query.search, function (i, item) {
+                        var desc = item.snippet;
 
-                    var row = '<a href="https://en.wikipedia.org/wiki/' + item.title +
-                        '" target="_blank" class="list-group-item"><h4 class="list-group-item-heading">' + item.title +
-                        '</h4><p class="list-group-item-text">' + desc + '</p></a>';
-                    content.append(row);
-                }); //loop
+                        var row = '<a href="https://en.wikipedia.org/wiki/' + item.title +
+                            '" target="_blank" class="list-group-item"><h4 class="list-group-item-heading">' + item.title +
+                            '</h4><p class="list-group-item-text">' + desc + '</p></a>';
+                        content.append(row);
+                    }); //loop
+                }
+                else
+                {
+                    alert("No results for this query!")
+                }
             }); //json
 
             pullTopInputGroup();
